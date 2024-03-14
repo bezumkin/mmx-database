@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Plugin[] $Plugins
  * @property-read Snippet[] $Snippets
  * @property-read Chunk[] $Chunks
- * @property-read TV[] $TVs
+ * @property-read TV[] $Tvs
  */
 class Category extends Model
 {
@@ -55,7 +55,7 @@ class Category extends Model
         return $this->hasMany(Chunk::class, 'category');
     }
 
-    public function TVs(): HasMany
+    public function Tvs(): HasMany
     {
         return $this->hasMany(TV::class, 'category');
     }

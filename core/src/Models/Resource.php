@@ -59,7 +59,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read Template $Template
  * @property-read TVResource[] $TvResources
  * @property-read TVResource[] $TvValues
- * @property-read TV[] $TVs
+ * @property-read TV[] $Tvs
  */
 class Resource extends Model
 {
@@ -122,7 +122,7 @@ class Resource extends Model
         return $this->TVResources();
     }
 
-    public function TVs(): HasManyThrough
+    public function Tvs(): HasManyThrough
     {
         return $this->hasManyThrough(TV::class, TVResource::class, 'contentid', 'id', 'id', 'tmplvarid');
     }

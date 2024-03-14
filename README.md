@@ -54,7 +54,7 @@ $categories = \MMX\Database\Models\Category::query()
     ->with('Plugins')
     ->with('Snippets')
     ->with('Chunks')
-    ->with('TVs')
+    ->with('Tvs')
     ->get();
 foreach ($categories as $category) {
     print_r($category->toArray());
