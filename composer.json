@@ -1,0 +1,31 @@
+{
+  "name": "mmx/database",
+  "type": "library",
+  "license": "MIT",
+  "description": "Eloquent for MODX 3",
+  "authors": [
+    {
+      "name": "Vasily Naumkin",
+      "email": "bezumkin@yandex.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MMX\\Database\\": "core/src/"
+    }
+  },
+  "bin": [
+    "bin/mmx-database"
+  ],
+  "require": {
+    "php": ">=8.1",
+    "illuminate/database": "v10.47.0",
+    "illuminate/events": "v10.47.0"
+  },
+  "require-dev": {
+    "modx/revolution": "^v3.0.0"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

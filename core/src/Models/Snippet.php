@@ -1,0 +1,43 @@
+<?php
+
+namespace MMX\Database\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+/**
+ * @property int $id
+ * @property int $source
+ * @property bool $property_preprocess
+ * @property string $name
+ * @property string $description
+ * @property int $editor_type
+ * @property int $category
+ * @property bool $cache_type
+ * @property string $snippet
+ * @property bool $locked
+ * @property array $properties
+ * @property string $moduleguid
+ * @property bool $static
+ * @property string $static_file
+ *
+ * @property-read Category $Category
+ */
+class Snippet extends Model
+{
+    public $timestamps = false;
+    protected $table = 'site_snippets';
+    protected $guarded = ['id'];
+    protected $casts = [
+        'property_preprocess' => 'bool',
+        'cache_type' => 'bool',
+        'locked' => 'bool',
+        'properties' => 'array',
+        'static' => 'bool',
+    ];
+
+    public function Category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category');
+    }
+}
