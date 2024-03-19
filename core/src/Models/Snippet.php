@@ -4,6 +4,7 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MMX\Database\Models\Casts\Serialize;
 
 /**
  * @property int $id
@@ -32,7 +33,7 @@ class Snippet extends Model
         'property_preprocess' => 'bool',
         'cache_type' => 'bool',
         'locked' => 'bool',
-        'properties' => 'array',
+        'properties' => Serialize::class,
         'static' => 'bool',
     ];
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use MMX\Database\Models\Casts\Serialize;
 
 /**
  * @property int $id
@@ -17,6 +18,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property int $category
  * @property string $display
  * @property string $default_text
+ * @property array $properties
+ * @property array $input_properties
+ * @property array $output_properties
  * @property bool $static
  * @property string $static_file
  *
@@ -30,6 +34,9 @@ class TV extends Model
     protected $table = 'site_tmplvars';
     protected $casts = [
         'active' => 'boolean',
+        'properties' => Serialize::class,
+        'input_properties' => Serialize::class,
+        'output_properties' => Serialize::class,
     ];
 
     public function ResourceValues(): HasMany

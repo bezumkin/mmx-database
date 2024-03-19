@@ -5,6 +5,7 @@ namespace MMX\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\Models\Casts\Serialize;
 
 /**
  * @property int $id
@@ -28,7 +29,7 @@ class Template extends Model
     protected $guarded = ['id'];
     protected $casts = [
         'static' => 'boolean',
-        'properties' => 'array',
+        'properties' => Serialize::class,
     ];
 
     public function Resources(): HasMany

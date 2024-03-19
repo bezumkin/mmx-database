@@ -5,6 +5,7 @@ namespace MMX\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\Models\Casts\Serialize;
 
 /**
  * @property int $id
@@ -35,7 +36,7 @@ class Plugin extends Model
         'property_preprocess' => 'bool',
         'cache_type' => 'bool',
         'locked' => 'bool',
-        'properties' => 'array',
+        'properties' => Serialize::class,
         'disabled' => 'bool',
         'static' => 'bool',
     ];
