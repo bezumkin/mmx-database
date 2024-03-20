@@ -11,7 +11,7 @@ This package can be installed only with Composer.
 If you are still not using Composer with MODX 3, just download the `composer.json` of your version:
 ```bash
 cd /to/modx/root/
-wget https://github.com/modxcms/revolution/blob/v3.0.4-pl/composer.json
+wget https://raw.githubusercontent.com/modxcms/revolution/v3.0.4-pl/composer.json
 ```
 
 Then run `composer update` and you are ready to install the **mmx** packages.
@@ -71,7 +71,7 @@ mmxDatabase models are not contain any MODX related logic, like clearing cache o
 
 This is just a convenient way to work with MODX database directly, without xPDO.
 
-Project is still under development, do not hesitate to use [issues][3] if you have any,
+Project is still under development, do not hesitate to use [issues][3] if you have any.
 
 [1]: https://github.com/bezumkin/mmx-database/tree/main/core/src/Models
 [2]: https://laravel.com/docs/10.x/eloquent
