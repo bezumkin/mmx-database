@@ -14,6 +14,13 @@ class Install extends Command
 
     protected static $defaultName = 'install';
     protected static $defaultDescription = 'Install mmxDatabase extra for MODX 3';
+    protected modX $modx;
+
+    public function __construct(modX $modx, ?string $name = null)
+    {
+        parent::__construct($name);
+        $this->modx = $modx;
+    }
 
     public function run(InputInterface $input, OutputInterface $output): void
     {
@@ -33,9 +40,7 @@ class Install extends Command
             $output->writeln('<info>Created namespace "' . App::NAMESPACE . '"</info>');
         }
 
-        /** @var modX $modx */
-        global $modx;
-        $modx->getCacheManager()->refresh();
+        $this->modx->getCacheManager()->refresh();
         $output->writeln('<info>Cleared MODX cache</info>');
     }
 }

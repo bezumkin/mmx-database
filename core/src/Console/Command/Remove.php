@@ -13,6 +13,13 @@ class Remove extends Command
 {
     protected static $defaultName = 'remove';
     protected static $defaultDescription = 'Remove mmxDatabase extra from MODX 3';
+    protected modX $modx;
+
+    public function __construct(modX $modx, ?string $name = null)
+    {
+        parent::__construct($name);
+        $this->modx = $modx;
+    }
 
     public function run(InputInterface $input, OutputInterface $output): void
     {
@@ -28,9 +35,7 @@ class Remove extends Command
             $output->writeln('<info>Removed namespace "' . App::NAMESPACE . '"</info>');
         }
 
-        /** @var modX $modx */
-        global $modx;
-        $modx->getCacheManager()->refresh();
+        $this->modx->getCacheManager()->refresh();
         $output->writeln('<info>Cleared MODX cache</info>');
     }
 }
