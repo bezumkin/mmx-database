@@ -2,7 +2,7 @@
   "name": "mmx/database",
   "type": "library",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Eloquent for MODX 3",
   "authors": [
     {
@@ -19,9 +19,9 @@
     "bin/mmx-database"
   ],
   "require": {
-    "php": ">=8.1",
-    "illuminate/database": "v10.47.0",
-    "illuminate/events": "v10.47.0"
+    "php": ">=7.4",
+    "illuminate/database": "v8.83.27|v9.52.16|v10.47.0",
+    "illuminate/events": "v8.83.27|v9.52.16|v10.47.0"
   },
   "require-dev": {
     "modx/revolution": "^v3.0.0"
