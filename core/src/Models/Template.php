@@ -3,7 +3,6 @@
 namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MMX\Database\Models\Casts\Serialize;
 
@@ -24,6 +23,8 @@ use MMX\Database\Models\Casts\Serialize;
  */
 class Template extends Model
 {
+    use Traits\StaticElement;
+
     public $timestamps = false;
     protected $table = 'site_templates';
     protected $guarded = ['id'];
@@ -31,6 +32,7 @@ class Template extends Model
         'static' => 'boolean',
         'properties' => Serialize::class,
     ];
+    protected string $contentField = 'content';
 
     public function Resources(): HasMany
     {
@@ -40,10 +42,5 @@ class Template extends Model
     public function TVTemplates(): HasMany
     {
         return $this->hasMany(TVTemplate::class, 'templateid');
-    }
-
-    public function Category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category');
     }
 }

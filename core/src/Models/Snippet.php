@@ -3,7 +3,6 @@
 namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MMX\Database\Models\Casts\Serialize;
 
 /**
@@ -21,11 +20,11 @@ use MMX\Database\Models\Casts\Serialize;
  * @property string $moduleguid
  * @property bool $static
  * @property string $static_file
- *
- * @property-read Category $Category
  */
 class Snippet extends Model
 {
+    use Traits\StaticElement;
+
     public $timestamps = false;
     protected $table = 'site_snippets';
     protected $guarded = ['id'];
@@ -36,9 +35,5 @@ class Snippet extends Model
         'properties' => Serialize::class,
         'static' => 'bool',
     ];
-
-    public function Category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category');
-    }
+    protected string $contentField = 'snippet';
 }

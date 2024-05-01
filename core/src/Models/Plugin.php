@@ -3,7 +3,6 @@
 namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use MMX\Database\Models\Casts\Serialize;
 
@@ -24,11 +23,12 @@ use MMX\Database\Models\Casts\Serialize;
  * @property bool $static
  * @property string $static_file
  *
- * @property-read Category $Category
  * @property-read PluginEvent[] $Events
  */
 class Plugin extends Model
 {
+    use Traits\StaticElement;
+
     public $timestamps = false;
     protected $table = 'site_plugins';
     protected $guarded = ['id'];
@@ -40,11 +40,7 @@ class Plugin extends Model
         'disabled' => 'bool',
         'static' => 'bool',
     ];
-
-    public function Category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category');
-    }
+    protected string $contentField = 'plugincode';
 
     public function Events(): HasMany
     {

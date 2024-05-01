@@ -3,7 +3,6 @@
 namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use MMX\Database\Models\Casts\Serialize;
@@ -26,18 +25,22 @@ use MMX\Database\Models\Casts\Serialize;
  *
  * @property-read Resource $Resources
  * @property-read TVResource $ResourceValues
- * @property-read Category $Category
  */
 class TV extends Model
 {
+    use Traits\StaticElement;
+
     public $timestamps = false;
     protected $table = 'site_tmplvars';
+    protected $guarded = ['id'];
     protected $casts = [
-        'active' => 'boolean',
+        'active' => 'bool',
         'properties' => Serialize::class,
         'input_properties' => Serialize::class,
         'output_properties' => Serialize::class,
+        'static' => 'bool',
     ];
+    protected string $contentField = 'default_text';
 
     public function ResourceValues(): HasMany
     {
@@ -47,10 +50,5 @@ class TV extends Model
     public function Resources(): HasManyThrough
     {
         return $this->HasManyThrough(Resource::class, TVResource::class, 'tmplvarid', 'id', 'id', 'contentid');
-    }
-
-    public function Category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category');
     }
 }
