@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<phpunit colors="true"
+         verbose="true"
+         bootstrap="../core/bootstrap.php"
+>
+    <coverage/>
+    <testsuites>
+        <testsuite name="Units">
+            <directory>Units</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

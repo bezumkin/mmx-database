@@ -1,3 +1,4 @@
 /.idea
+/tests/*.cache
 /vendor
 /composer.lock

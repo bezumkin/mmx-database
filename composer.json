@@ -2,7 +2,7 @@
   "name": "mmx/database",
   "type": "library",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Eloquent for MODX 3",
   "authors": [
     {
@@ -15,16 +15,25 @@
       "MMX\\Database\\": "core/src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "MMX\\Database\\Tests\\": "tests/"
+    }
+  },
   "bin": [
     "bin/mmx-database"
   ],
   "require": {
     "php": ">=7.4",
-    "illuminate/database": "v8.83.27|v9.52.16|v10.47.0",
-    "illuminate/events": "v8.83.27|v9.52.16|v10.47.0"
+    "illuminate/database": "^v8.83|^v10.47",
+    "illuminate/events": "^v8.83|^v10.47"
   },
   "require-dev": {
-    "modx/revolution": "^v3.0.0"
+    "modx/revolution": "^v3.0",
+    "phpunit/phpunit": "^9.6"
+  },
+  "scripts": {
+    "phpunit": "phpunit -c ./tests/phpunit.xml"
   },
   "config": {
     "sort-packages": true
