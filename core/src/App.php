@@ -3,6 +3,7 @@
 namespace MMX\Database;
 
 use Illuminate\Database\Capsule\Manager;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Events\Dispatcher;
 use MODX\Revolution\modX;
 
@@ -32,5 +33,12 @@ class App extends Manager
         $this->setEventDispatcher(new Dispatcher());
         $this->setAsGlobal();
         $this->bootEloquent();
+
+        $this->getDatabaseManager()->listen(function (QueryExecuted $event) use ($modx) {
+            $time = ($event->time / 1000);
+            $modx->executedQueries++;
+            $modx->queryTime += $time;
+            $modx->log(modX::LOG_LEVEL_INFO, '[mmxDatabase] ' . $event->sql . '; ' . $time . ' s');
+        });
     }
 }
