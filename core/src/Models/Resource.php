@@ -2,11 +2,11 @@
 
 namespace MMX\Database\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use MMX\Database\Models\Casts\Timestamp;
 
 /**
  * @property int $id
@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $alias
  * @property string $link_attributes
  * @property bool $published
- * @property Carbon $pub_date
- * @property Carbon $unpub_date
+ * @property string $pub_date
+ * @property string $unpub_date
  * @property int $parent
  * @property bool $isfolder
  * @property string $introtext
@@ -29,13 +29,13 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property bool $searchable
  * @property bool $cacheable
  * @property int $createdby
- * @property Carbon $createdon
+ * @property string $createdon
  * @property int $editedby
- * @property Carbon $editedon
+ * @property string $editedon
  * @property bool $deleted
- * @property Carbon $deletedon
+ * @property string $deletedon
  * @property int $deletedby
- * @property Carbon $publishedon
+ * @property string $publishedon
  * @property int $publishedby
  * @property string $menutitle
  * @property bool $donthit
@@ -81,12 +81,12 @@ class Resource extends Model
         'show_in_tree' => 'bool',
         'alias_visible' => 'bool',
         'properties' => 'array',
-        'createdon' => 'date',
-        'editedon' => 'date',
-        'deletedon' => 'date',
-        'publishedon' => 'date',
-        'pub_date' => 'date',
-        'unpub_date' => 'date',
+        'createdon' => Timestamp::class,
+        'editedon' => Timestamp::class,
+        'deletedon' => Timestamp::class,
+        'publishedon' => Timestamp::class,
+        'pub_date' => Timestamp::class,
+        'unpub_date' => Timestamp::class,
     ];
     protected $dateFormat = 'U';
     const CREATED_AT = 'createdon';

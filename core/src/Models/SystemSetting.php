@@ -24,7 +24,7 @@ class SystemSetting extends Model
     protected $table = 'system_settings';
     protected $guarded = ['key'];
     protected $casts = [
-        'editedon' => 'date',
+        'editedon' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function Namespace(): BelongsTo

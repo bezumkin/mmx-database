@@ -2,9 +2,9 @@
 
 namespace MMX\Database\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MMX\Database\Models\Casts\Timestamp;
 
 /**
  * @property int $id
@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $phone
  * @property string $mobilephone
  * @property bool $blocked
- * @property Carbon $blockeduntil
- * @property Carbon $blockedafter
+ * @property int $blockeduntil
+ * @property int $blockedafter
  * @property int $logincount
- * @property Carbon $lastlogin
- * @property Carbon $thislogin
+ * @property int $lastlogin
+ * @property int $thislogin
  * @property int $failedlogincount
  * @property string $sessionid
  * @property int $dob
@@ -38,16 +38,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class UserProfile extends Model
 {
+    public $timestamps = false;
     protected $table = 'user_attributes';
     protected $casts = [
         'blocked' => 'bool',
-        'blockeduntil' => 'date',
-        'blockedafter' => 'date',
-        'thislogin' => 'date',
-        'lastlogin' => 'date',
+        'blockeduntil' => 'int',
+        'blockedafter' => 'int',
+        'thislogin' => 'int',
+        'lastlogin' => 'int',
         'extended' => 'array',
     ];
-    protected $dateFormat = 'U';
 
     public function User(): BelongsTo
     {

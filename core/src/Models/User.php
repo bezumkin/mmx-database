@@ -2,9 +2,9 @@
 
 namespace MMX\Database\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use MMX\Database\Models\Casts\Timestamp;
 
 /**
  * @property int $id
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $primary_group
  * @property string $session_stale
  * @property bool $sudo
- * @property Carbon $createdon
+ * @property string $createdon
  *
  * @property-read UserProfile $Profile
  */
@@ -31,9 +31,18 @@ class User extends Model
     protected $casts = [
         'active' => 'bool',
         'sudo' => 'bool',
-        'createdon' => 'date',
+        'createdon' => Timestamp::class,
     ];
     protected $dateFormat = 'U';
+
+    protected static function boot(): void
+    {
+        static::creating(static function (self $model) {
+            if (!$model->isDirty('createdon')) {
+                $model->createdon = $model->freshTimestamp();
+            }
+        });
+    }
 
     public function Profile(): HasOne
     {
