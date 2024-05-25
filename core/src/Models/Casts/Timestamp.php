@@ -17,7 +17,7 @@ class Timestamp implements CastsAttributes
             return Carbon::createFromTimestamp($value)->format('Y-m-d H:i:s');
         }
 
-        return 0;
+        return $value;
     }
 
     public function set($model, string $key, $value, array $attributes)
