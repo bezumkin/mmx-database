@@ -11,24 +11,30 @@ class ResourceTest extends TestCase
     public function testDate(): void
     {
         global $modx;
-        $time = time();
 
-        $dates = ['createdon', 'editedon', 'deletedon', 'publishedon', 'pub_date', 'unpub_date'];
+        $dates = [
+            'createdon' => time(),
+            'editedon' => -1,
+            'deletedon' => '',
+            'publishedon' => 0,
+            'pub_date' => '0',
+            'unpub_date' => null,
+        ];
 
         $oldResource = new modResource($modx);
-        foreach ($dates as $date) {
-            $oldResource->set($date, $date === 'unpub_date' ? 0 : $time);
+        foreach ($dates as $field => $date) {
+            $oldResource->set($field, $date);
         }
         $oldArray = $oldResource->toArray();
 
         $newResource = new Resource();
-        foreach ($dates as $date) {
-            $newResource->setAttribute($date, $date === 'unpub_date' ? 0 : $time);
+        foreach ($dates as $field => $date) {
+            $newResource->setAttribute($field, $date);
         }
         $newArray = $newResource->toArray();
 
-        foreach ($dates as $date) {
-            $this->assertEquals($oldArray[$date], $newArray[$date]);
+        foreach ($dates as $field => $date) {
+            $this->assertEquals($oldArray[$field], $newArray[$field]);
         }
     }
 }
