@@ -2,7 +2,7 @@
   "name": "mmx/database",
   "type": "library",
   "license": "MIT",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Eloquent for MODX 3",
   "authors": [
     {

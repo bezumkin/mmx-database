@@ -22,6 +22,13 @@ class Timestamp implements CastsAttributes
 
     public function set($model, string $key, $value, array $attributes)
     {
+        if (!$value) {
+            return 0;
+        }
+        if (!is_numeric($value)) {
+            $value = strtotime($value);
+        }
+
         return $value;
     }
 }

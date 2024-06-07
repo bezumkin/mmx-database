@@ -5,6 +5,9 @@ namespace MMX\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\App;
+use MODX\Revolution\modMenu;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property string $text
@@ -33,6 +36,11 @@ class Menu extends Model
         'handler' => '',
         'permissions' => '',
     ];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modMenu::class, $this->text);
+    }
 
     public function Parent(): BelongsTo
     {

@@ -5,7 +5,9 @@ namespace MMX\Database\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use MMX\Database\Models\Casts\Timestamp;
+use MMX\Database\App;
+use MODX\Revolution\modContextSetting;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property string $context_key
@@ -34,11 +36,19 @@ class ContextSetting extends Model
 
     protected static function boot(): void
     {
+        parent::boot();
+
         static::saving(static function (self $model) {
             if (!$model->isDirty('editedon')) {
                 $model->editedon = $model->freshTimestamp();
             }
         });
+    }
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()
+            ->getObject(modContextSetting::class, array_combine($this->primaryKey, [$this->context_key, $this->key]));
     }
 
     public function Context(): BelongsTo

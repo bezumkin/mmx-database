@@ -3,7 +3,9 @@
 namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MMX\Database\Models\Casts\Serialize;
+use MMX\Database\App;
+use MODX\Revolution\modChunk;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -31,8 +33,13 @@ class Chunk extends Model
         'property_preprocess' => 'bool',
         'cache_type' => 'bool',
         'locked' => 'bool',
-        'properties' => Serialize::class,
+        'properties' => Casts\Serialize::class,
         'static' => 'bool',
     ];
     protected string $contentField = 'snippet';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modChunk::class, $this->id);
+    }
 }

@@ -5,7 +5,9 @@ namespace MMX\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use MMX\Database\Models\Casts\Serialize;
+use MMX\Database\App;
+use MODX\Revolution\modTemplateVar;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -35,12 +37,17 @@ class TV extends Model
     protected $guarded = ['id'];
     protected $casts = [
         'active' => 'bool',
-        'properties' => Serialize::class,
-        'input_properties' => Serialize::class,
-        'output_properties' => Serialize::class,
+        'properties' => Casts\Serialize::class,
+        'input_properties' => Casts\Serialize::class,
+        'output_properties' => Casts\Serialize::class,
         'static' => 'bool',
     ];
     protected string $contentField = 'default_text';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modTemplateVar::class, $this->id);
+    }
 
     public function ResourceValues(): HasMany
     {

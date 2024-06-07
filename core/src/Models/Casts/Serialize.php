@@ -8,7 +8,7 @@ class Serialize implements CastsAttributes
 {
     public function get($model, string $key, $value, array $attributes)
     {
-        return unserialize($value, ['allowed_classes' => []]);
+        return $value ? unserialize($value, ['allowed_classes' => []]) : null;
     }
 
     public function set($model, string $key, $value, array $attributes)

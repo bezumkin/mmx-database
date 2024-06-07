@@ -4,7 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MMX\Database\Models\Casts\Serialize;
+use MMX\Database\App;
+use MODX\Revolution\modTemplate;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -30,9 +32,14 @@ class Template extends Model
     protected $guarded = ['id'];
     protected $casts = [
         'static' => 'boolean',
-        'properties' => Serialize::class,
+        'properties' => Casts\Serialize::class,
     ];
     protected string $contentField = 'content';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modTemplate::class, $this->id);
+    }
 
     public function Resources(): HasMany
     {

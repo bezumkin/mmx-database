@@ -4,7 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use MMX\Database\Models\Casts\Timestamp;
+use MMX\Database\App;
+use MODX\Revolution\modUserProfile;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -40,6 +42,7 @@ class UserProfile extends Model
 {
     public $timestamps = false;
     protected $table = 'user_attributes';
+    protected $guarded = ['id', 'internalKey'];
     protected $casts = [
         'blocked' => 'bool',
         'blockeduntil' => 'int',
@@ -48,6 +51,11 @@ class UserProfile extends Model
         'lastlogin' => 'int',
         'extended' => 'array',
     ];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modUserProfile::class, $this->id);
+    }
 
     public function User(): BelongsTo
     {

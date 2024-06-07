@@ -4,6 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\App;
+use MODX\Revolution\modContext;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property string $key
@@ -21,6 +24,11 @@ class Context extends Model
     protected $table = 'context';
     protected $keyType = 'string';
     protected $guarded = ['key'];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modContext::class, $this->key);
+    }
 
     public function Resources(): HasMany
     {

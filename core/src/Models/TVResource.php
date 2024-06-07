@@ -4,6 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MMX\Database\App;
+use MODX\Revolution\modTemplateVarResource;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -19,6 +22,11 @@ class TVResource extends Model
     public $timestamps = false;
     protected $table = 'site_tmplvar_contentvalues';
     protected $guarded = ['id'];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modTemplateVarResource::class, $this->id);
+    }
 
     public function Resource(): BelongsTo
     {

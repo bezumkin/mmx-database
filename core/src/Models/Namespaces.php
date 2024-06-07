@@ -4,6 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\App;
+use MODX\Revolution\modNamespace;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property string name
@@ -20,6 +23,11 @@ class Namespaces extends Model
     public $timestamps = false;
     protected $table = 'namespaces';
     protected $primaryKey = 'name';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modNamespace::class, $this->name);
+    }
 
     public function Menus(): HasMany
     {

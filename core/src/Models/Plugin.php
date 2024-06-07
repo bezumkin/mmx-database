@@ -4,7 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MMX\Database\Models\Casts\Serialize;
+use MMX\Database\App;
+use MODX\Revolution\modPlugin;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -36,11 +38,16 @@ class Plugin extends Model
         'property_preprocess' => 'bool',
         'cache_type' => 'bool',
         'locked' => 'bool',
-        'properties' => Serialize::class,
+        'properties' => Casts\Serialize::class,
         'disabled' => 'bool',
         'static' => 'bool',
     ];
     protected string $contentField = 'plugincode';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modPlugin::class, $this->id);
+    }
 
     public function Events(): HasMany
     {

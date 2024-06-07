@@ -11,10 +11,12 @@ class App extends Manager
 {
     public const NAME = 'mmxDatabase';
     public const NAMESPACE = 'mmx-database';
+    public static modX $modx;
 
     public function __construct(modX $modx)
     {
         parent::__construct();
+        static::$modx = $modx;
 
         $config = $modx->getConnection()->config;
         $this->addConnection([
@@ -40,5 +42,10 @@ class App extends Manager
             $modx->queryTime += $time;
             $modx->log(modX::LOG_LEVEL_INFO, '[mmxDatabase] ' . $event->sql . '; ' . $time . ' s');
         });
+    }
+
+    public static function getModx(): modX
+    {
+        return static::$modx;
     }
 }

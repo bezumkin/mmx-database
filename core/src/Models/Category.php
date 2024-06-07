@@ -5,6 +5,9 @@ namespace MMX\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use MMX\Database\App;
+use MODX\Revolution\modCategory;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -24,6 +27,11 @@ class Category extends Model
 {
     public $timestamps = false;
     protected $table = 'categories';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modCategory::class, $this->id);
+    }
 
     public function Parent(): BelongsTo
     {

@@ -5,6 +5,9 @@ namespace MMX\Database\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MMX\Database\App;
+use MODX\Revolution\modSystemSetting;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property string $key
@@ -26,6 +29,11 @@ class SystemSetting extends Model
     protected $casts = [
         'editedon' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modSystemSetting::class, $this->key);
+    }
 
     public function Namespace(): BelongsTo
     {

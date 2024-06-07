@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use MMX\Database\Models\Casts\Timestamp;
+use MMX\Database\App;
+use MODX\Revolution\modResource;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -81,16 +83,21 @@ class Resource extends Model
         'show_in_tree' => 'bool',
         'alias_visible' => 'bool',
         'properties' => 'array',
-        'createdon' => Timestamp::class,
-        'editedon' => Timestamp::class,
-        'deletedon' => Timestamp::class,
-        'publishedon' => Timestamp::class,
-        'pub_date' => Timestamp::class,
-        'unpub_date' => Timestamp::class,
+        'createdon' => Casts\Timestamp::class,
+        'editedon' => Casts\Timestamp::class,
+        'deletedon' => Casts\Timestamp::class,
+        'publishedon' => Casts\Timestamp::class,
+        'pub_date' => Casts\Timestamp::class,
+        'unpub_date' => Casts\Timestamp::class,
     ];
     protected $dateFormat = 'U';
     const CREATED_AT = 'createdon';
     const UPDATED_AT = 'editedon';
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modResource::class, $this->id);
+    }
 
     public function Parent(): BelongsTo
     {

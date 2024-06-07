@@ -4,7 +4,9 @@ namespace MMX\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MMX\Database\Models\Casts\Serialize;
+use MMX\Database\App;
+use MODX\Revolution\Sources\modMediaSource;
+use xPDO\Om\xPDOObject;
 
 /**
  * @property int $id
@@ -24,9 +26,14 @@ class Source extends Model
 {
     protected $table = 'media_sources';
     protected $casts = [
-        'properties' => Serialize::class,
+        'properties' => Casts\Serialize::class,
         'is_stream' => 'bool',
     ];
+
+    public function getModxObject(): ?xPDOObject
+    {
+        return App::getModx()->getObject(modMediaSource::class, $this->id);
+    }
 
     public function Templates(): HasMany
     {
