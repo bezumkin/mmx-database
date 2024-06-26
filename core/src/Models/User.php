@@ -41,6 +41,7 @@ class User extends Model
         'sudo' => 'bool',
         'createdon' => Casts\Timestamp::class,
     ];
+    protected $hidden = ['password', 'cachepwd', 'salt'];
     protected $dateFormat = 'U';
 
     protected static function boot(): void
